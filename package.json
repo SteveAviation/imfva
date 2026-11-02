@@ -1,0 +1,8 @@
+{
+  "name": "crew-center",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@neondatabase/serverless": "^0.10.4"
+  }
+}

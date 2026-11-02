@@ -1,0 +1,15 @@
+create table if not exists pilots (username text primary key, name text not null, hub text not null, pw text not null, joined date not null default current_date);
+alter table pilots add column if not exists id serial, add column if not exists email text not null default '', add column if not exists role text not null default 'pilot', add column if not exists status text not null default 'applicant', add column if not exists step int not null default 1, add column if not exists score int, add column if not exists callsign text, add column if not exists extra jsonb not null default '{}';
+create table if not exists pireps (id bigserial primary key, username text not null references pilots(username) on delete cascade, flown date not null, flight text not null, dep text not null, arr text not null, ac text not null, minutes int not null check (minutes > 0), lr int not null default 0, note text not null default '');
+alter table pireps add column if not exists fuel int not null default 0, add column if not exists mult text not null default '', add column if not exists credited int not null default 0, add column if not exists status text not null default 'pending', add column if not exists reviewer text;
+create table if not exists comments (id bigserial primary key, pirep_id bigint not null references pireps(id) on delete cascade, username text not null, body text not null, at timestamptz not null default now());
+create table if not exists aircraft (id serial primary key, name text unique not null, airline text not null default '');
+create table if not exists routes (id serial primary key, flight text not null, dep text not null, arr text not null, minutes int not null default 0, descr text not null default '');
+create table if not exists multipliers (id serial primary key, code text unique not null, factor numeric not null default 1, descr text not null default '');
+create table if not exists ranks (id serial primary key, name text not null, min_hours int not null default 0);
+create table if not exists awards (id serial primary key, name text not null, descr text not null default '');
+create table if not exists pilot_awards (id serial primary key, username text not null, award_id int not null);
+create table if not exists live (id serial primary key, username text not null, flight text not null, dep text not null, arr text not null, ac text not null, reg text not null, sched text not null, platform text not null default '', url text not null default '', note text not null default '', status text not null default 'pending');
+create table if not exists activity (id bigserial primary key, username text not null, action text not null, detail text not null default '', at timestamptz not null default now());
+insert into aircraft (name) values ('Airbus A320 NEO'),('Airbus A321 NEO'),('Boeing 737-800'),('Boeing 737 MAX 8'),('Boeing 787-9'),('Airbus A330-300') on conflict do nothing;
+insert into ranks (name, min_hours) select * from (values ('Cadet',0),('Second Officer',10),('First Officer',50),('Senior First Officer',150),('Captain',300)) v where not exists (select 1 from ranks);

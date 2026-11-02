@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Crew Center</title>
+<link rel="icon" href="/logo.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700&display=swap">
+<style>
+:root{--bg:#eef3fa;--card:#fff;--ink:#0a1d4a;--mute:#566384;--line:#cdd7e8;--accent:#1f5bd6;--accent-ink:#fff;--hero:#0a1d4a;--hero-ink:#fff;--bad:#b3261e;--ok:#1a7f4b;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#070d1c;--card:#0f1a33;--ink:#e6ecf8;--mute:#93a1c4;--line:#243153;--accent:#8fb2ff;--accent-ink:#07122b;--hero:#16295c;--bad:#ff8a80;--ok:#5bd694}}
+:root[data-theme="dark"]{--bg:#070d1c;--card:#0f1a33;--ink:#e6ecf8;--mute:#93a1c4;--line:#243153;--accent:#8fb2ff;--accent-ink:#07122b;--hero:#16295c;--bad:#ff8a80;--ok:#5bd694}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 "Barlow",system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:var(--accent)}
+.wrap{max-width:720px;margin:0 auto;padding:18px 16px 40px}
+h1{margin:0 0 6px;font-size:1.6rem;font-weight:700}
+h2{margin:0 0 8px;font-size:1.2rem}
+h3{margin:22px 0 4px;font-size:1.05rem}
+nav{display:flex;gap:20px;overflow-x:auto;border-bottom:1px solid var(--line);margin:8px 0 20px}
+nav a{white-space:nowrap;padding:10px 0;color:var(--mute);text-decoration:none;border-bottom:3px solid transparent}
+nav a.on{color:var(--ink);font-weight:600;border-color:var(--accent)}
+.pass{display:grid;grid-template-columns:1fr auto;gap:16px;background:var(--hero);color:var(--hero-ink);border-radius:18px;padding:20px}
+.pass h2{font-size:1.6rem;line-height:1.1;margin:0}
+.pass p{margin:6px 0 0;opacity:.8}
+.pass .cs{border-left:2px dashed rgba(255,255,255,.4);padding-left:16px;text-align:right}
+.kv{margin:12px 0 0}
+.kv div{display:flex;justify-content:space-between;gap:12px;padding:12px 2px;border-bottom:1px solid var(--line)}
+.kv dt{color:var(--mute)}.kv dd{margin:0;font-weight:600}
+.fl{margin:0;padding:10px 2px;border-bottom:1px solid var(--line)}
+.mute{color:var(--mute)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px}
+label{display:block;margin:12px 0;color:var(--mute);font-size:.92rem}
+input,select,textarea{display:block;width:100%;margin-top:4px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font:inherit}
+input:focus,select:focus,textarea:focus,button:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.btn{background:var(--accent);color:var(--accent-ink);border:0;border-radius:8px;padding:11px 20px;font:inherit;font-weight:600;cursor:pointer}
+.btn.del{background:none;color:var(--bad);border:1px solid var(--line);padding:4px 10px;font-size:.85rem}
+.err{color:var(--bad);margin:8px 0;min-height:1.2em}.ok{color:var(--ok);font-weight:600}
+.scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.92rem}
+th{color:var(--mute);font-weight:600}
+th,td{text-align:left;padding:10px 8px 10px 2px;border-bottom:1px solid var(--line);white-space:nowrap}
+.top{border-bottom:1px solid var(--line);background:var(--card)}
+.top .in{max-width:1040px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand img{display:block;height:44px;width:44px}
+.links{display:flex;align-items:center;gap:4px}
+.links a,.tg{padding:8px 12px;border-radius:8px;color:var(--ink);text-decoration:none;background:none;border:0;font:inherit;cursor:pointer}
+.links a.on{font-weight:600;background:var(--bg)}
+.tg{border:1px solid var(--line)}
+.hero,.band{background-size:cover;background-position:center;color:#fff;display:flex;align-items:flex-end}
+.hero{min-height:68vh;background-image:linear-gradient(90deg,rgba(3,28,56,.88),rgba(3,28,56,.25)),url(/flight.jpg)}
+.band{min-height:300px;background-image:linear-gradient(rgba(3,28,56,.55),rgba(3,28,56,.82)),url(/airport.jpg)}
+.in2{width:100%;max-width:1040px;margin:0 auto;padding:40px 16px}
+.hero h1{font-size:clamp(2.2rem,8vw,4rem);line-height:1.02;max-width:12ch;margin:0 0 14px}
+.hero p,.band p{max-width:46ch;margin:0 0 20px;font-size:1.1rem}
+.cta{display:flex;flex-wrap:wrap;gap:10px}
+.btn.alt{background:none;color:#fff;border:2px solid #fff}
+.sec{max-width:1040px;margin:0 auto;padding:36px 16px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--line);color:var(--mute)}
+.stats div{padding:22px 12px;border-right:1px solid var(--line)}
+.stats div:last-child{border:0}
+.stats b{display:block;font-size:2rem;line-height:1.1;color:var(--ink)}
+.steps{padding-left:1.2em}.steps li{margin:10px 0}
+footer{padding:24px 16px;text-align:center;color:var(--mute);font-size:.9rem}
+.app{display:grid;grid-template-columns:240px 1fr;min-height:100vh}
+.side{background:var(--card);border-right:1px solid var(--line);padding:14px 10px;display:flex;flex-direction:column;gap:2px}
+.side img.lg{display:block;height:48px;width:48px;margin:0 0 10px 6px}
+.side a{padding:9px 12px;border-radius:8px;color:var(--ink);text-decoration:none}
+.side a.on{background:var(--bg);font-weight:600}
+.side h4{margin:14px 12px 4px;color:var(--mute);font-weight:600;font-size:.85rem}
+.main{padding:20px 18px 48px;width:100%;max-width:980px}
+@media(max-width:800px){.app{display:block}.side{flex-direction:row;overflow-x:auto;border-right:0;border-bottom:1px solid var(--line);padding:8px;align-items:center;gap:4px}.side a{white-space:nowrap}.side h4{display:none}.side img.lg{margin:0 6px 0 0;height:36px;width:36px}}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px}
+.pc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;cursor:pointer}
+.pc p{margin:4px 0}.pc .rt{font-size:1.7rem;font-weight:600;margin:10px 0}
+.badge{display:inline-block;padding:1px 10px;border-radius:999px;font-size:.85rem;background:var(--bg);border:1px solid var(--line);margin-left:6px}
+.badge.approved{color:var(--ok)}.badge.rejected{color:var(--bad)}
+.modalbg{position:fixed;inset:0;background:rgba(0,0,0,.55);display:flex;align-items:flex-end;justify-content:center;z-index:5;padding-top:env(safe-area-inset-top,0px)}
+.modal{background:var(--card);width:100%;max-width:560px;max-height:92vh;overflow:auto;border-radius:18px 18px 0 0;padding:20px 20px calc(20px + env(safe-area-inset-bottom,0px))}
+.between{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.bar{height:10px;border-radius:99px;background:var(--line);overflow:hidden;margin:14px 0}.bar i{display:block;height:100%;background:var(--accent)}
+.steps li.done{color:var(--ok);font-weight:600}
+.btn.alt2{background:none;color:var(--accent);border:1px solid var(--accent)}
+.inl{display:flex;gap:6px;align-items:center}.inl input,.inl select{width:84px;margin:0}
+.row2{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.hint{color:var(--mute);font-size:.9rem}
+.crud{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;align-items:end;margin-bottom:14px}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+const S='cc_token',VA='Xiamen Air Virtual',FORM='https://docs.google.com/forms/d/149bB-sgt9BJTtdhzXF8HhBaPnON0dNkyvOhxYUWzYdI/viewform';
+const RANKS=[[0,'Cadet'],[10,'Second Officer'],[50,'First Officer'],[150,'Senior First Officer'],[300,'Captain']];
+const HUBS=['ZSAM','ZSFZ','ZSPD','ZBAA','ZSHC','ZGGG','ZUUU','VHHH'];
+const NAV=[['dash','Dashboard'],['file','File PIREP'],['pireps','PIREPs'],['routes','Find Routes'],['live','Live Scheduling']];
+const STAFF=[['adash','Admin Dashboard'],['mpireps','Manage PIREPs'],['mmult','Manage Multipliers'],['mroutes','Manage Routes'],['musers','Manage Users'],['mair','Manage Aircrafts'],['mranks','Manage Ranks'],['mlive','Manage Live Scheduling'],['mawards','Manage Awards'],['pawards','Pilot Awards'],['mperm','Manage Permissions']];
+const CR={mmult:{t:'multipliers',title:'Manage Multipliers',f:[['code','Code'],['factor','Factor','number'],['descr','Description']]},
+mroutes:{t:'routes',title:'Manage Routes',f:[['flight','Flight'],['dep','Dep ICAO'],['arr','Arr ICAO'],['minutes','Minutes','number'],['descr','Description']]},
+mair:{t:'aircraft',title:'Manage Aircrafts',f:[['name','Aircraft'],['airline','Airline']]},
+mranks:{t:'ranks',title:'Manage Ranks',f:[['name','Rank'],['min_hours','Min hours','number']]},
+mawards:{t:'awards',title:'Manage Awards',f:[['name','Award'],['descr','Description']]},
+pawards:{t:'pilot_awards',title:'Pilot Awards',f:[['username','Username'],['award_id','Award ID','number']]}};
+const ls={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+let tok=ls.get(S,null),me=null,page='home',mode='login',msg='',ok='',D={},modal=null,stat=null,statTried=false,pf='all',fill={};
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt=m=>String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0');
+const cap=s=>s?s[0].toUpperCase()+s.slice(1):'';
+const opts=(a,sel)=>a.map(x=>`<option${x===sel?' selected':''}>${esc(x)}</option>`).join('');
+const isStaff=()=>me&&['staff','admin'].includes(me.pilot.role);
+const ex=x=>x.extra&&typeof x.extra==='object'?x.extra:{};
+async function api(a,body){const r=await fetch('/api/'+a,{method:'POST',headers:{'content-type':'application/json',...(tok?{authorization:'Bearer '+tok}:{})},body:JSON.stringify(body||{})});const j=await r.json().catch(()=>({}));if(!r.ok)throw Object.assign(new Error(j.error||'Something went wrong. Try again.'),{status:r.status});return j}
+async function load(){try{me=await api('me')}catch(e){me=null;if(e.status===401){tok=null;ls.set(S,null)}}}
+async function go(p,note){page=p;msg='';ok=note||'';modal=null;D={};window.scrollTo(0,0);render();
+try{if(p==='file'||p==='routes')D=await api('catalog');else if(p==='pireps')D=await api('pireps',{scope:pf});else if(p==='live'){D={...await api('live_list'),...await api('catalog')}}else if(p==='adash')D=await api('admin');else if(p==='mpireps')D=await api('pireps',{scope:'pending'});else if(p==='musers'||p==='mperm')D=await api('users');else if(p==='mlive')D=await api('live_list',{all:1});else if(CR[p])D=await api('crud_list',{t:CR[p].t});else if(p==='dash'||p==='apply')await load()}catch(e){if(e.status===401){tok=null;me=null;ls.set(S,null);page='auth'}msg=e.message}
+D.ready=true;render()}
+const dark=()=>{const t=document.documentElement.dataset.theme;return t?t==='dark':matchMedia('(prefers-color-scheme: dark)').matches};
+const fmtn=n=>n==null?'–':Number(n).toLocaleString();
+const topBar=()=>`<header class="top"><div class="in"><a class="brand" href="#" data-act="go" data-v="home" aria-label="${esc(VA)} home"><img src="/logo.png" alt="${esc(VA)}"></a><div class="links"><a href="#" data-act="go" data-v="home" class="${page==='home'?'on':''}">Home</a><a href="#" data-act="go" data-v="${me?(me.pilot.status==='active'?'dash':'apply'):'auth'}" class="${page==='auth'?'on':''}">${me?'Crew center':'Sign in'}</a><button class="tg" data-act="theme" aria-label="Switch between dark and light mode">${dark()?'☀ Light':'☾ Dark'}</button></div></div></header>`;
+
+function homeView(){const s=stat||{};
+return `<section class="hero"><div class="in2"><h1>Your next flight starts here</h1><p>Join ${esc(VA)}, fly in your own simulator and file every flight to build your logbook and climb the ranks.</p><div class="cta"><button class="btn" data-act="join">Join the crew</button><button class="btn alt" data-act="signin">Sign in</button></div></div></section>
+<div class="sec" style="padding-top:0;padding-bottom:0"><div class="stats"><div><b>${fmtn(s.pilots)}</b>Pilots</div><div><b>${fmtn(s.flights)}</b>Flights filed</div><div><b>${s.minutes==null?'–':fmtn(Math.round(s.minutes/60))}</b>Hours flown</div></div></div>
+<section class="sec"><h2>How it works</h2><ol class="steps"><li>Create a pilot account with a username and your home hub.</li><li>Fly any route in your simulator.</li><li>File a PIREP afterward. Your hours, rank and logbook update right away.</li></ol></section>
+<section class="sec" style="padding-top:0"><h2>Ranks</h2><dl class="kv">${RANKS.map(([h,n])=>`<div><dt>${n}</dt><dd>${h===0?'Start here':h+' hours'}</dd></div>`).join('')}</dl></section>
+<section class="band"><div class="in2"><h2>Ready for pushback?</h2><p>Your first PIREP is a few minutes away.</p><div class="cta"><button class="btn" data-act="join">Join the crew</button></div></div></section>
+<footer>For flight simulation use only.</footer>`}
+
+
+function authView(){const reg=mode==='reg';
+return `<main class="wrap"><h1>${reg?'Apply to join':'Pilot sign in'}</h1><p class="mute">${reg?'Fill in your application. Staff review every new pilot.':'Sign in to your crew center.'}</p><div class="card"><form id="auth">
+${reg?`<label>Full name<input name="name" required maxlength="40" autocomplete="name"></label><label>Email<input name="email" type="email" required maxlength="80" autocomplete="email"></label>`:''}
+<label>Username<input name="cs" required minlength="3" maxlength="20" placeholder="pilot_li" autocomplete="username" autocapitalize="none"></label>
+<label>Password<input name="pw" type="password" required minlength="6" autocomplete="${reg?'new-password':'current-password'}"></label>
+${reg?`<label>Preferred hub<select name="hub">${opts(HUBS)}</select></label><label>Simulator<select name="sim">${opts(['Infinite Flight','MSFS','X-Plane','Other'])}</select></label><label>Infinite Flight username<input name="ifc" maxlength="60"></label><label>Discord username<input name="discord" maxlength="60"></label><label>Flying experience<textarea name="exp" rows="3" maxlength="300"></textarea></label>`:''}
+<p class="err">${esc(msg)}</p><button class="btn" type="submit">${reg?'Submit application':'Sign in'}</button></form>
+<p><a href="#" data-act="mode">${reg?'Already a pilot? Sign in':'New pilot? Apply to join'}</a></p></div></main>`}
+
+const card=p=>`<article class="pc" data-act="open" data-v="${p.id}"><div><b>${esc(p.flight)}</b><span class="badge ${p.status}">${cap(p.status)}</span></div><p class="mute">${esc(p.ac)}${p.airline?' · '+esc(p.airline):''}</p><p class="mute">Logged ${esc(p.flown)}</p><div class="rt">${esc(p.dep)} → ${esc(p.arr)}</div><p class="mute">Block duration ${fmt(p.minutes)}<br>Fuel ${Number(p.fuel).toLocaleString()} kg · Multiplier ${esc(p.mult||'None')}</p><p><b>${esc(p.name)}</b> <span class="mute">${esc(p.callsign||'')}</span></p><p class="mute">${p.comments} comment${p.comments==1?'':'s'}<br>Click to inspect and comment</p></article>`;
+const routeRows=()=>{const f=n=>(($('#rf [name='+n+']')||{}).value||'').trim().toUpperCase();return (D.routes||[]).filter(x=>x.flight.toUpperCase().includes(f('flight'))&&x.dep.toUpperCase().includes(f('dep'))&&x.arr.toUpperCase().includes(f('arr'))).map(x=>`<div class="fl row2"><div><b>${esc(x.flight)}</b> <span class="mute">${esc(x.descr)}</span><br>${esc(x.dep)} → ${esc(x.arr)} <span class="mute">Scheduled ${fmt(x.minutes)}</span></div><button class="btn" data-act="fill" data-v="${x.id}">File PIREP</button></div>`).join('')||'<p class="mute">No routes match.</p>'};
+const liveTable=(rows,adm)=>`<div class="scroll"><table><tr>${adm?'<th>Pilot</th>':''}<th>Flight</th><th>Route</th><th>Aircraft</th><th>Registration</th><th>Time</th><th>Stream</th><th>Status</th>${adm?'<th></th>':''}</tr>${(rows||[]).map(x=>`<tr>${adm?`<td>${esc(x.name)}</td>`:''}<td>${esc(x.flight)}</td><td>${esc(x.dep)}–${esc(x.arr)}</td><td>${esc(x.ac)}</td><td>${esc(x.reg)}</td><td>${esc(x.sched.replace('T',' '))}</td><td>${esc(x.platform)}${x.url?` <a href="${esc(x.url)}" target="_blank" rel="noopener">link</a>`:''}</td><td><span class="badge ${x.status}">${cap(x.status)}</span></td>${adm?`<td>${x.status==='pending'?`<button class="btn" data-act="lrev" data-v="${x.id}" data-s="approved">Approve</button> <button class="btn del" data-act="lrev" data-v="${x.id}" data-s="rejected">Reject</button>`:''}</td>`:''}</tr>`).join('')}</table></div>`;
+const kv=a=>`<dl class="kv">${a.map(([k,v])=>`<div><dt>${k}</dt><dd>${v}</dd></div>`).join('')}</dl>`;
+const discord=()=>me.discord?`<p><a class="btn" href="${esc(me.discord)}" target="_blank" rel="noopener">Open Discord invite</a></p>`:'';
+
+const V={
+apply(){const p=me.pilot,s=p.step,st=['Application submitted','Declared written test complete','Score received','Discord invite'];
+return `<h1>Application status</h1><p class="mute">Track your written test and onboarding progress.</p><div class="bar"><i style="width:${s*25}%"></i></div>
+<ol class="steps">${st.map((t,i)=>`<li class="${i<s?'done':''}">${i<s?'✓ ':''}${t}</li>`).join('')}</ol>
+${s===1?`<div class="card"><h2>Written test</h2><p>Take the written test, then confirm here.</p><p><a class="btn" href="${FORM}" target="_blank" rel="noopener">Open written test</a></p><p><button class="btn alt2" data-act="declare">I have completed the test</button></p></div>`:''}
+${s===2?'<p class="mute">Waiting for staff to record your score.</p>':''}${s===3?'<p class="mute">Score received. Waiting for staff approval.</p>':''}${discord()}
+<h3>Personal information</h3>${kv([['Name',esc(p.name)],['Radio callsign',esc(p.callsign||'')],['Email',esc(p.email)],['Written test score',p.score==null?'Pending':p.score+'/100']])}`},
+dash(){const p=me.pilot,s=me.stats;return `<section class="pass"><div><h2>${esc(p.name)}</h2><p>${esc(me.rank)}, based at ${esc(p.hub)}</p></div><div class="cs"><h2>${esc(p.callsign||p.username)}</h2><p>${fmt(s.minutes)} hours flown</p></div></section>
+${kv([['Approved flights',s.flights],['PIREPs awaiting review',s.pending],['Awards',me.awards.length?esc(me.awards.join(', ')):'None yet']])}${discord()}`},
+file(){const f=fill;fill={};const t=new Date().toISOString().slice(0,10);
+return `<h1>File PIREP</h1><p class="mute">Submit a flight report. Staff review it before it counts.</p><form id="pirep">
+<div class="row"><label>Flight number<input name="flight" required pattern="[A-Za-z0-9]{2,8}" placeholder="CZ3101" value="${esc(f.flight||'')}"></label><label>Flight date<input name="date" type="date" required value="${t}"></label></div>
+<div class="row"><label>Departure ICAO<input name="dep" required pattern="[A-Za-z]{4}" maxlength="4" placeholder="ZGGG" value="${esc(f.dep||'')}"></label><label>Arrival ICAO<input name="arr" required pattern="[A-Za-z]{4}" maxlength="4" placeholder="ZBAA" value="${esc(f.arr||'')}"></label></div>
+<div class="row"><label>Flight time (HH:MM)<input name="t" required pattern="[0-9]{1,2}:[0-5][0-9]" placeholder="02:55" value="${esc(f.t||'')}"></label><label>Fuel used (kg)<input name="fuel" type="number" min="0" placeholder="12850"></label></div>
+<label>Aircraft<select name="ac" required><option value="">Select aircraft</option>${opts((D.aircraft||[]).map(x=>x.name))}</select></label>
+<label>Multiplier code (optional)<input name="mult" placeholder="1001"></label>
+<label>Notes (optional)<textarea name="note" rows="3" maxlength="300" placeholder="Details for the PIREP review team"></textarea></label><p class="hint">Your notes are posted as the first comment on this PIREP.</p>
+<p class="err">${esc(msg)}</p><button class="btn" type="submit">Submit PIREP</button></form>`},
+pireps(){return `<h1>PIREPs</h1><p><a href="#" data-act="pf" data-v="all" class="${pf==='all'?'on':''}">All</a> · <a href="#" data-act="pf" data-v="mine" class="${pf==='mine'?'on':''}">Mine</a></p><div class="cards">${(D.rows||[]).map(card).join('')||'<p class="mute">No PIREPs yet.</p>'}</div>`},
+routes(){return `<h1>Find routes</h1><p class="mute">Search routes and file a PIREP for one.</p><form id="rf" class="row"><label>Flight<input name="flight"></label><label>Departure<input name="dep" maxlength="4"></label><label>Arrival<input name="arr" maxlength="4"></label></form><div id="rl">${routeRows()}</div>`},
+live(){const dt=new Date(Date.now()+864e5).toISOString().slice(0,16);
+return `<h1>Live Scheduling</h1><p class="mute">Request a slot for a live-streamed flight. Staff approve each request.</p><form id="live">
+<div class="row"><label>Flight number<input name="flight" required pattern="[A-Za-z0-9]{2,8}"></label><label>Aircraft<select name="ac" required><option value="">Select aircraft</option>${opts((D.aircraft||[]).map(x=>x.name))}</select></label></div>
+<div class="row"><label>Departure ICAO<input name="dep" required pattern="[A-Za-z]{4}" maxlength="4"></label><label>Arrival ICAO<input name="arr" required pattern="[A-Za-z]{4}" maxlength="4"></label></div>
+<div class="row"><label>Aircraft registration<input name="reg" required maxlength="12" placeholder="B-1234"></label><label>Scheduled time<input name="sched" type="datetime-local" required value="${dt}"></label></div>
+<div class="row"><label>Platform<select name="platform">${opts(['YouTube','Twitch','Bilibili','Other'])}</select></label><label>Stream URL<input name="url" type="url" maxlength="200"></label></div>
+<label>Notes<textarea name="note" rows="2" maxlength="300"></textarea></label><p class="err">${esc(msg)}</p><button class="btn" type="submit">Submit request</button></form><h3>Your requests</h3>${liveTable(D.rows,false)}`},
+adash(){const c=D.c||{};return `<h1>Admin dashboard</h1>${kv([['Active pilots',c.pilots],['Applications waiting',c.applicants],['PIREPs waiting',c.pireps],['Live requests waiting',c.live]])}<h3>Recent pilot activity</h3><div class="scroll"><table><tr><th>When</th><th>User</th><th>Action</th><th>Detail</th></tr>${(D.act||[]).map(x=>`<tr><td>${esc(x.at)}</td><td>${esc(x.username)}</td><td>${esc(x.action)}</td><td>${esc(x.detail)}</td></tr>`).join('')}</table></div>`},
+mpireps(){return `<h1>Manage PIREPs</h1><p class="mute">Open a PIREP to approve or reject it.</p><div class="cards">${(D.rows||[]).map(card).join('')||'<p class="mute">Nothing waiting.</p>'}</div>`},
+musers(){return `<h1>Manage Users</h1><p class="mute">Review applications, record written test scores and approve new pilots.</p><div class="scroll"><table><tr><th>Pilot</th><th>Application</th><th>Status</th><th>Test score</th><th></th></tr>${(D.rows||[]).map(x=>`<tr><td><b>${esc(x.name)}</b><br><span class="mute">@${esc(x.username)} ${esc(x.callsign||'')}<br>${esc(x.email)}</span></td><td class="mute" style="white-space:normal;min-width:180px">${esc([x.hub,ex(x).sim,ex(x).ifc,ex(x).discord].filter(Boolean).join(', '))}<br>${esc(ex(x).exp||'')}</td><td>${cap(x.status)}<br><span class="mute">step ${x.step}/4, ${x.role}</span></td><td><form class="inl" data-u="${esc(x.username)}"><input name="score" type="number" min="0" max="100" value="${x.score??''}" aria-label="Score"><button class="btn del" type="submit">Save</button></form></td><td>${x.status==='active'?`<button class="btn del" data-act="suspend" data-v="${esc(x.username)}">Suspend</button>`:`<button class="btn" data-act="approve" data-v="${esc(x.username)}">Approve</button>`}</td></tr>`).join('')}</table></div>`},
+mperm(){return `<h1>Manage Permissions</h1><p class="mute">Staff can approve applicants and PIREPs. Admins can also change roles.</p><div class="scroll"><table><tr><th>Pilot</th><th>Role</th></tr>${(D.rows||[]).map(x=>`<tr><td><b>${esc(x.name)}</b> <span class="mute">@${esc(x.username)}</span></td><td><form class="inl" data-u="${esc(x.username)}" data-role="1"><select name="role" style="width:110px">${opts(['pilot','staff','admin'],x.role)}</select><button class="btn del" type="submit">Save</button></form></td></tr>`).join('')}</table></div>`},
+mlive(){return `<h1>Manage Live Scheduling</h1>${liveTable(D.rows,true)}`}};
+function crudView(k){const c=CR[k];return `<h1>${c.title}</h1><form id="crud" class="crud" data-t="${c.t}">${c.f.map(([n,l,t])=>`<label>${l}<input name="${n}" type="${t||'text'}"${t==='number'?' step="any"':''}></label>`).join('')}<button class="btn" type="submit">Add</button></form><div class="scroll"><table><tr>${c.f.map(f=>`<th>${f[1]}</th>`).join('')}<th></th></tr>${(D.rows||[]).map(r=>`<tr>${c.f.map(f=>`<td>${esc(r[f[0]])}</td>`).join('')}<td><button class="btn del" data-act="cdel" data-v="${r.id}">Delete</button></td></tr>`).join('')}</table></div>`}
+function page_(){if(CR[page])return D.ready?crudView(page):'<p class="mute">Loading…</p>';const v=V[page];return v?(D.ready||page==='dash'||page==='apply'?v():'<p class="mute">Loading…</p>'):''}
+function shell(){const p=me.pilot,act=p.status==='active',lk=([k,l])=>`<a href="#" data-act="go" data-v="${k}" class="${page===k?'on':''}">${l}</a>`;
+return `<div class="app"><aside class="side"><a href="#" data-act="go" data-v="home"><img class="lg" src="/logo.png" alt="Home"></a>${(act?NAV:[['apply','Recruitment']]).map(lk).join('')}${isStaff()?`<h4>Staff Console</h4>${STAFF.filter(x=>x[0]!=='mperm'||p.role==='admin').map(lk).join('')}`:''}<h4>${esc(p.name)}</h4><a href="#" data-act="theme">${dark()?'☀ Light mode':'☾ Dark mode'}</a><a href="#" data-act="go" data-v="home">Home page</a><a href="#" data-act="out">Sign out</a></aside><main class="main">${ok?`<p class="ok">${esc(ok)}</p>`:''}${msg?`<p class="err">${esc(msg)}</p>`:''}${page_()}</main></div>`}
+function modalView(){if(!modal)return'';const p=modal.p,c=modal.c;
+return `<div class="modalbg" data-act="close"><div class="modal"><div class="between"><h2>PIREP #${esc(p.id)}<span class="badge ${p.status}">${cap(p.status)}</span></h2><button class="btn del" data-act="close">Close</button></div><p class="mute">${esc(p.flight)} · ${esc(p.dep)} → ${esc(p.arr)}</p>
+${kv([['Flight number',esc(p.flight)],['Date',esc(p.flown)],['Block duration',fmt(p.minutes)],['Aircraft',esc(p.ac)],['Fuel used',Number(p.fuel).toLocaleString()+' kg'],['Multiplier',esc(p.mult||'None')],['Pilot',esc(p.name)+' ('+esc(p.callsign||'')+')']])}
+${isStaff()&&p.status==='pending'?`<div class="cta"><button class="btn" data-act="review" data-v="approved">Approve</button><button class="btn del" data-act="review" data-v="rejected">Reject</button></div>`:''}
+<h3>Comments <span class="mute">${c.length}/10</span></h3>${c.map(x=>`<p class="fl"><b>${esc(x.name)}</b> <span class="mute">${esc(x.callsign||'')} ${esc(x.at)}</span><br>${esc(x.body)}</p>`).join('')||'<p class="mute">No comments yet.</p>'}
+<form id="cm"><label>Add a comment<textarea name="body" rows="3" maxlength="300" required placeholder="Write a comment about this PIREP"></textarea></label><p class="err">${esc(msg)}</p><button class="btn" type="submit">Post comment</button></form></div></div>`}
+function render(){if(page==='home'&&!statTried){statTried=true;api('stats').then(j=>{stat=j;if(page==='home')render()}).catch(()=>{})}
+$('#app').innerHTML=page==='home'?topBar()+homeView():!me?topBar()+authView():shell()+modalView()}
+const dead=err=>{if(err.status===401){tok=null;me=null;ls.set(S,null);page='auth'}msg=err.message;render()};
+
+document.addEventListener('click',async e=>{const a=e.target.closest('[data-act]');if(!a)return;const t=a.dataset.act,v=a.dataset.v;if(t==='close'&&a.classList.contains('modalbg')&&e.target!==a)return;e.preventDefault();
+try{
+if(t==='go')await go(v==='auth'&&me?(me.pilot.status==='active'?'dash':'apply'):v);
+else if(t==='join'||t==='signin'){mode=t==='join'?'reg':'login';await go(me?(me.pilot.status==='active'?'dash':'apply'):'auth')}
+else if(t==='mode'){mode=mode==='reg'?'login':'reg';msg='';render()}
+else if(t==='theme'){const n=dark()?'light':'dark';document.documentElement.dataset.theme=n;ls.set('cc_theme',n);render()}
+else if(t==='out'){tok=null;me=null;ls.set(S,null);mode='login';await go('home')}
+else if(t==='declare'){await api('declare');await go('apply','Thanks. Staff will record your score.')}
+else if(t==='pf'){pf=v;await go('pireps')}
+else if(t==='open'){msg='';modal=await api('pirep_get',{id:v});render()}
+else if(t==='close'){modal=null;if(page==='pireps'||page==='mpireps')await go(page);else render()}
+else if(t==='review'){const id=modal.p.id;await api('pirep_review',{id,status:v});await go(page,'PIREP '+v+'.')}
+else if(t==='fill'){const r=D.routes.find(x=>String(x.id)===v);fill={flight:r.flight,dep:r.dep,arr:r.arr,t:fmt(r.minutes)};await go('file')}
+else if(t==='approve'||t==='suspend'){await api('user_set',{username:v,status:t==='approve'?'active':'suspended'});await go(page,'User updated.')}
+else if(t==='lrev'){await api('live_review',{id:v,status:a.dataset.s});await go(page,'Request '+a.dataset.s+'.')}
+else if(t==='cdel'){await api('crud_del',{t:CR[page].t,id:v});await go(page,'Deleted.')}
+}catch(err){dead(err)}});
+document.addEventListener('input',e=>{if(e.target.closest('#rf'))$('#rl').innerHTML=routeRows()});
+document.addEventListener('submit',async e=>{e.preventDefault();const f=e.target,d=Object.fromEntries(new FormData(f));msg='';
+try{
+if(f.id==='rf')return;
+if(f.id==='auth'){const j=await api(mode==='reg'?'register':'login',d);tok=j.token;ls.set(S,tok);await load();return go(me.pilot.status==='active'?'dash':'apply')}
+if(f.id==='pirep'){const m=/^(\d{1,2}):([0-5]\d)$/.exec(d.t.trim());if(!m||d.dep.toUpperCase()===d.arr.toUpperCase()){msg=!m?'Enter the flight time as HH:MM.':'Departure and arrival must be different airports.';return render()}
+await api('pirep',{flight:d.flight,date:d.date,dep:d.dep,arr:d.arr,ac:d.ac,min:(+m[1])*60+(+m[2]),fuel:d.fuel,mult:d.mult,note:d.note});pf='mine';return go('pireps','PIREP submitted for review.')}
+if(f.id==='cm'){const id=modal.p.id;await api('comment',{id,body:d.body});modal=await api('pirep_get',{id});return render()}
+if(f.id==='live'){await api('live_create',d);return go('live','Live request submitted.')}
+if(f.id==='crud'){await api('crud_save',{t:f.dataset.t,row:d});return go(page,'Saved.')}
+if(f.dataset.u){await api('user_set',f.dataset.role?{username:f.dataset.u,role:d.role}:{username:f.dataset.u,score:d.score});return go(page,'Saved.')}
+}catch(err){dead(err)}});
+(async()=>{const t0=ls.get('cc_theme',null);if(t0)document.documentElement.dataset.theme=t0;if(tok)await load();render()})();
+</script>
+</body>
+</html>
